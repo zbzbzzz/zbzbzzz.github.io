@@ -60,7 +60,7 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
+				<li><a href="/">随笔</a></li>
 	        
 			</ul>
 		</nav>
@@ -134,7 +134,7 @@
 				
 					<li style="width: 50%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 50%"><a href="/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -150,6 +150,92 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-关于这几天在学习spring-security时遇到的坑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/09/关于这几天在学习spring-security时遇到的坑/">关于这几天在学习spring security时遇到的坑</a>
+    </h1>
+  
+
+        
+        <a href="/2019/06/09/关于这几天在学习spring-security时遇到的坑/" class="archive-article-date">
+  	<time datetime="2019-06-09T00:02:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Spring-security的多界面登录"><a href="#Spring-security的多界面登录" class="headerlink" title="Spring security的多界面登录"></a>Spring security的多界面登录</h1><ul>
+<li><p>最近在做自己的购物车小项目时需要同时开放两个登录界面，一个用于普通用于的登录与使用，一个用于系统管理员的登录与使用，而且还要支持Spring security的加密，同时对于用户和管理员所过滤的界面的应该有所不同。</p>
+</li>
+<li><p>所以在spring-security.xml中我是这样配置的：</p>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 管理员登录配置 --&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">security:http</span> <span class="attr">auto-config</span>=<span class="string">"true"</span> <span class="attr">use-expressions</span>=<span class="string">"true"</span> <span class="attr">pattern</span>=<span class="string">"/admin/**"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">security:intercept-url</span> <span class="attr">pattern</span>=<span class="string">"/admin/**"</span></span></span><br><span class="line"><span class="tag">		<span class="attr">access</span>=<span class="string">"hasAnyRole('ROLE_ADMIN')"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">security:form-login</span> <span class="attr">login-page</span>=<span class="string">"/admin/login.html"</span></span></span><br><span class="line"><span class="tag">		<span class="attr">login-processing-url</span>=<span class="string">"/admin/Adminlogin.do"</span> <span class="attr">default-target-</span>                                <span class="attr">url</span>=<span class="string">"/admin/success.jsp"</span></span></span><br><span class="line"><span class="tag">		<span class="attr">authentication-failure-url</span>=<span class="string">"/admin/fail.jsp"</span> <span class="attr">username-parameter</span>=<span class="string">"email"</span></span></span><br><span class="line"><span class="tag">		<span class="attr">password-parameter</span>=<span class="string">"password"</span> /&gt;</span></span><br><span class="line">	 <span class="comment">&lt;!-- &lt;security:csrf /&gt; --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">security:logout</span> <span class="attr">invalidate-session</span>=<span class="string">"true"</span> <span class="attr">logout-url</span>=<span class="string">"/admin/adminlogout.do"</span></span></span><br><span class="line"><span class="tag">		<span class="attr">logout-success-url</span>=<span class="string">"/admin/login.html"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">security:http</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 用户登录配置 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">security:http</span> <span class="attr">auto-config</span>=<span class="string">"true"</span> <span class="attr">use-expressions</span>=<span class="string">"true"</span> <span class="attr">pattern</span>=<span class="string">"/user/**"</span>&gt;</span>		</span><br><span class="line">	<span class="tag">&lt;<span class="name">security:intercept-url</span> <span class="attr">pattern</span>=<span class="string">"/user/cart/**"</span></span></span><br><span class="line"><span class="tag">		<span class="attr">access</span>=<span class="string">"hasAnyRole('ROLE_USER','ROLE_ADMIN')"</span> /&gt;</span>	</span><br><span class="line">	<span class="tag">&lt;<span class="name">security:form-login</span> <span class="attr">login-page</span>=<span class="string">"/user/login.jsp"</span></span></span><br><span class="line"><span class="tag">		<span class="attr">login-processing-url</span>=<span class="string">"/user/Userlogin.do"</span> <span class="attr">default-target-url</span>=<span class="string">"/user/home.jsp"</span></span></span><br><span class="line"><span class="tag">		<span class="attr">authentication-failure-url</span>=<span class="string">"/user/fail.jsp"</span> <span class="attr">username-parameter</span>=<span class="string">"email"</span></span></span><br><span class="line"><span class="tag">		<span class="attr">password-parameter</span>=<span class="string">"password"</span> /&gt;</span>	</span><br><span class="line">	<span class="tag">&lt;<span class="name">security:logout</span> <span class="attr">invalidate-session</span>=<span class="string">"true"</span> <span class="attr">logout-url</span>=<span class="string">"/user/userlogout.do"</span></span></span><br><span class="line"><span class="tag">		<span class="attr">logout-success-url</span>=<span class="string">"/user/login.jsp"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">security:http</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这里需要注意的是范围更大的过滤配置需要写在小的下面要不然会报异常</li>
+<li>然后由于购物车需要在选购商品是获取用户信息所以我用SecurityContextHolder来获取UserDetails具体代码如下</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Object principal = SecurityContextHolder</span><br><span class="line">					.getContext()</span><br><span class="line">       				.getAuthentication()</span><br><span class="line">       				.getPrincipal();</span><br><span class="line">String Email = ((UserDetails) principal)</span><br><span class="line">       			.getUsername();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>这里直接这样写会SecurityContextHolder会报NullPointerException</p>
+</li>
+<li><p>应该在spring-security中加入第三个<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">```xml</span><br><span class="line">	&lt;security:http auto-config=&quot;true&quot; use-expressions=&quot;true&quot; pattern=&quot;/**&quot;&gt;	</span><br><span class="line">		&lt;security:intercept-url pattern=&quot;/**&quot;</span><br><span class="line">			access=&quot;permitAll&quot; /&gt;		</span><br><span class="line">	&lt;/security:http&gt;</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>第三个<code>security:http</code>的范围应该是全部范围而且角色也应该包含所有角色</p>
+</li>
+<li><p>自此多登录页面就配置好了</p>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/06/09/关于这几天在学习spring-security时遇到的坑/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-我的第一个个人博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -363,7 +449,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
         <ul class="search-ul">
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>暂无</a>
+              <a href="https://github.com/zbzbzzz" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>我的github</a>
             </li>
           
         </ul>
