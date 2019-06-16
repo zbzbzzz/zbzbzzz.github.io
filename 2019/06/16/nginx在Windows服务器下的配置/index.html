@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | zbzbzzz的个人博客</title>
+  <title>nginx在Windows服务器下的配置 | zbzbzzz的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="希望有一天我也能有自己的开源项目">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zbzbzzz的个人博客">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="nginx在windows下的配置配置 首先我还是觉得nginx在Windows下配置是不适合的，相对于linux中的nginx性能会大打折扣，不过现在我对linux还不太熟悉，就分享下自己在Windows下的配置，如有不对的地方请见谅 配置如下：">
+<meta name="keywords" content="nginx windows">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nginx在Windows服务器下的配置">
+<meta property="og:url" content="http://yoursite.com/2019/06/16/nginx在Windows服务器下的配置/index.html">
 <meta property="og:site_name" content="zbzbzzz的个人博客">
-<meta property="og:description" content="希望有一天我也能有自己的开源项目">
+<meta property="og:description" content="nginx在windows下的配置配置 首先我还是觉得nginx在Windows下配置是不适合的，相对于linux中的nginx性能会大打折扣，不过现在我对linux还不太熟悉，就分享下自己在Windows下的配置，如有不对的地方请见谅 配置如下：">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-16T06:50:48.617Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zbzbzzz的个人博客">
-<meta name="twitter:description" content="希望有一天我也能有自己的开源项目">
+<meta name="twitter:title" content="nginx在Windows服务器下的配置">
+<meta name="twitter:description" content="nginx在windows下的配置配置 首先我还是觉得nginx在Windows下配置是不适合的，相对于linux中的nginx性能会大打折扣，不过现在我对linux还不太熟悉，就分享下自己在Windows下的配置，如有不对的地方请见谅 配置如下：">
   
     <link rel="alternative" href="/atom.xml" title="zbzbzzz的个人博客" type="application/atom+xml">
   
@@ -149,36 +151,165 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-nginx在Windows服务器下的配置" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/16/nginx在Windows服务器下的配置/" class="archive-article-date">
-  	<time datetime="2019-06-16T05:32:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-16</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/16/nginx在Windows服务器下的配置/">nginx在Windows服务器下的配置</a>
+    <h1 class="article-title" itemprop="name">
+      nginx在Windows服务器下的配置
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/06/16/nginx在Windows服务器下的配置/" class="archive-article-date">
+  	<time datetime="2019-06-16T05:32:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+	  
+        <h1 id="nginx在windows下的配置"><a href="#nginx在windows下的配置" class="headerlink" title="nginx在windows下的配置"></a>nginx在windows下的配置</h1><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><ul>
+<li>首先我还是觉得nginx在Windows下配置是不适合的，相对于linux中的nginx性能会大打折扣，不过现在我对linux还不太熟悉，就分享下自己在Windows下的配置，如有不对的地方请见谅</li>
+<li>配置如下：</li>
+</ul>
+<a id="more"></a>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line"></span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;   </span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    </span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line">    #gzip 压缩传输</span><br><span class="line">     gzip on;</span><br><span class="line">     gzip_min_length 1k;  #最小1K     gzip_buffers 16 64K;</span><br><span class="line">     gzip_http_version 1.1;</span><br><span class="line">     gzip_comp_level 6;</span><br><span class="line">     gzip_types text/plain application/x-javascript text/css application/xml application/javascript;</span><br><span class="line">     gzip_vary on;</span><br><span class="line">	</span><br><span class="line">	#动态负载均衡组</span><br><span class="line">	upstream TomcatList&#123;</span><br><span class="line">    server  127.0.0.1:8333  weight=1;</span><br><span class="line">    server  127.0.0.1:8444  weight=1;</span><br><span class="line">	ip_hash;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  localhost;</span><br><span class="line"></span><br><span class="line">        #charset koi8-r;</span><br><span class="line"></span><br><span class="line">        #access_log  logs/host.access.log  main;</span><br><span class="line"></span><br><span class="line">        location / &#123;  </span><br><span class="line">			#index index;</span><br><span class="line">			proxy_set_header Host $host;				 </span><br><span class="line">			proxy_set_header X-Real-IP $remote_addr;				 </span><br><span class="line">			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">            proxy_pass http://TomcatList; 			</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">	location ~ .*\.(gif|css|js|jpg|jpeg|png|bmp|swf|flv|ico|svg|html|woff|woff2)$ &#123;</span><br><span class="line">        	</span><br><span class="line">	root C:/Users/Administrator/Desktop/static;</span><br><span class="line">        	</span><br><span class="line">                expires 30d;</span><br><span class="line">              </span><br><span class="line">                </span><br><span class="line">    	&#125;</span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">       </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">       </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="nginx的端口监听"><a href="#nginx的端口监听" class="headerlink" title="nginx的端口监听"></a>nginx的端口监听</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  localhost;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这表示我这个服务监听了80端口</li>
+</ul>
+<h2 id="反向代理和负载均衡"><a href="#反向代理和负载均衡" class="headerlink" title="反向代理和负载均衡"></a>反向代理和负载均衡</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#动态负载均衡组</span><br><span class="line">	upstream TomcatList&#123;</span><br><span class="line">    server  127.0.0.1:8333  weight=1;</span><br><span class="line">    server  127.0.0.1:8444  weight=1;</span><br><span class="line">	ip_hash;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这是我设的两个本地tomcat分别在8333和8444端口</li>
+<li>weight表示在负载均衡中服务器所占的权值，这里我设的权值都为1表示在访问时nginx会均匀的分配到两个服务器上</li>
+<li>ip_hash是解决session共享问题的一种方式</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;  </span><br><span class="line">		#index index;</span><br><span class="line">		proxy_set_header Host $host;				 </span><br><span class="line">		proxy_set_header X-Real-IP $remote_addr;				 </span><br><span class="line">		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">           proxy_pass http://TomcatList; 			</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>location的配置能让符合规则的请求反向代理到响应的配置中</li>
+<li>这里我配置的是proxy_pass <a href="http://TomcatList" target="_blank" rel="noopener">http://TomcatList</a>; </li>
+<li>也就是说我这里对nginx的请求都会反向代理到上面我配置的动态负载均衡组的两个服务器中</li>
+</ul>
+<h3 id="多个tomcat"><a href="#多个tomcat" class="headerlink" title="多个tomcat"></a>多个tomcat</h3><ul>
+<li>上面我使用了两个tomcat</li>
+<li>但是直接复制两个tomcat然后分别启动是会出错的</li>
+<li>因为这两个同样的tomcat的端口和环境变量都是相同的所以会产生冲突</li>
+<li>改端口自行百度一下，我来讲下怎么改变环境变量，百度上很多都是直接改电脑的环境变量</li>
+<li>其实这样过于复杂，我们可以直接打开tomcat目录下的\bin\catalina</li>
+<li>加上这么一句配置</li>
+<li>set CATALINA_HOME=你的tomcat目录</li>
+<li>在如下的位置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">setlocal</span><br><span class="line"></span><br><span class="line">set CATALINA_HOME=C:\Users\Administrator\Desktop\TomcatList\tomcat_8444\apache-tomcat-7.0.77</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">rem Suppress Terminate batch job on CTRL+C</span><br><span class="line">if not &quot;&quot;%1&quot;&quot; == &quot;&quot;run&quot;&quot; goto mainEntry</span><br><span class="line">if &quot;%TEMP%&quot; == &quot;&quot; goto mainEntry</span><br><span class="line">if exist &quot;%TEMP%\%~nx0.run&quot; goto mainEntry</span><br><span class="line">echo Y&gt;&quot;%TEMP%\%~nx0.run&quot;</span><br><span class="line">if not exist &quot;%TEMP%\%~nx0.run&quot; goto mainEntry</span><br><span class="line">echo Y&gt;&quot;%TEMP%\%~nx0.Y&quot;</span><br><span class="line">call &quot;%~f0&quot; %* &lt;&quot;%TEMP%\%~nx0.Y&quot;</span><br><span class="line">rem Use provided errorlevel</span><br><span class="line">set RETVAL=%ERRORLEVEL%</span><br><span class="line">del /Q &quot;%TEMP%\%~nx0.Y&quot; &gt;NUL 2&gt;&amp;1</span><br><span class="line">exit /B %RETVAL%</span><br><span class="line">:mainEntry</span><br><span class="line">del /Q &quot;%TEMP%\%~nx0.run&quot; &gt;NUL 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<h2 id="动静分离"><a href="#动静分离" class="headerlink" title="动静分离"></a>动静分离</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">location ~ .*\.(gif|css|js|jpg|jpeg|png|bmp|swf|flv|ico|svg|html|woff|woff2)$ &#123;</span><br><span class="line">        	</span><br><span class="line">	root C:/Users/Administrator/Desktop/static;</span><br><span class="line">        	</span><br><span class="line">                expires 30d;</span><br><span class="line">              </span><br><span class="line">                </span><br><span class="line">    	&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这个location是正则匹配后缀的</li>
+<li>静态资源都会被它匹配到</li>
+<li>为的就是使这些静态资源都由nginx处理，剩下的非静态的jsp由tomcat处理</li>
+<li>root 配置在服务器中静态资源的存放位置</li>
+<li>需要注意的是这里面存放的静态资源结构应该和tomcat的webapps下的目录结构保持一致要不然非常容易发生找不到资源的报错</li>
+<li>expires配置了客户端对这些资源的缓存时间这里配的是30天</li>
+</ul>
+<h2 id="session共享"><a href="#session共享" class="headerlink" title="session共享"></a>session共享</h2><ul>
+<li><p>因为我配置了两个服务器做负载均衡，但是两个服务器的session是不一样的当</p>
+</li>
+<li><p>所以当nginx把你从这个端口分配到另一个端口时，你存在session里面的信息就会丢失</p>
+</li>
+<li><p>上面我配置的ip_hash是一种解决方案</p>
+</li>
+<li><p>通过ip地址标记用户，如果多次请求都是从同一个ip来的，那么就都分配到同一个tomcat.<br>这样就不会出现负载均衡 session问题了. 处理手段也很简单</p>
+</li>
+<li><p>不过这种方案并不完美，当如下几种情况发生时就有问题：</p>
+<ol>
+<li>大量请求来之某个局域网，那么相当于就没有负载均衡了</li>
+<li>如果tomcat_8111 挂了，那么此时nginx只能把请求交给tomcat_8222,但是这里却没有记录session,用户体验依然受影响。</li>
+</ol>
+</li>
+<li><p>第二种方案就是使用redis存储session</p>
+</li>
+<li><p>这是目前来说比好的解决方案，不过配置会更加复杂，可以百度看下详细教程</p>
+</li>
+</ul>
+<h2 id="gzip优化web"><a href="#gzip优化web" class="headerlink" title="gzip优化web"></a>gzip优化web</h2><ul>
+<li>对应web的优化，这里想到的是通过对页面进行gzip压缩，然后传到用户那里，再解压，这样可以有效的减少带宽。这里就会用到Nginx 的gzip模块了。默认的Nginx是集成有gzip模块的。只需在http段增加下面配置即可。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#gzip 压缩传输</span><br><span class="line">     gzip on;</span><br><span class="line">     gzip_min_length 1k;  #最小1K     gzip_buffers 16 64K;</span><br><span class="line">     gzip_http_version 1.1;</span><br><span class="line">     gzip_comp_level 6;</span><br><span class="line">     gzip_types text/plain application/x-javascript text/css application/xml application/javascript;</span><br><span class="line">     gzip_vary on;</span><br></pre></td></tr></table></figure>
+
+
+      
+	  
+	  
+	  
+	  
+
+  <div class="declare">
+    <strong>本文作者：</strong>
+    
+      zbzbzzz
+    
+    <br>
+    <strong>本文链接：</strong>
+    http://yoursite.com/2019/06/16/nginx在Windows服务器下的配置/
+    <br>
+    <strong>版权声明：</strong>
+    本作品采用
+    <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+    进行许可。转载请注明出处！
+    
+  </div>
+
+
+
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -190,95 +321,146 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/06/16/nginx在Windows服务器下的配置/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/09/关于这几天在学习spring-security时遇到的坑/" class="archive-article-date">
-  	<time datetime="2019-06-09T00:02:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-09</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/06/09/关于这几天在学习spring-security时遇到的坑/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于这几天在学习spring security时遇到的坑</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/09/关于这几天在学习spring-security时遇到的坑/">关于这几天在学习spring security时遇到的坑</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Spring Security</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#nginx在windows下的配置"><span class="toc-number">1.</span> <span class="toc-text">nginx在windows下的配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置"><span class="toc-number">1.1.</span> <span class="toc-text">配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nginx的端口监听"><span class="toc-number">1.2.</span> <span class="toc-text">nginx的端口监听</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反向代理和负载均衡"><span class="toc-number">1.3.</span> <span class="toc-text">反向代理和负载均衡</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#多个tomcat"><span class="toc-number">1.3.1.</span> <span class="toc-text">多个tomcat</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动静分离"><span class="toc-number">1.4.</span> <span class="toc-text">动静分离</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#session共享"><span class="toc-number">1.5.</span> <span class="toc-text">session共享</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gzip优化web"><span class="toc-number">1.6.</span> <span class="toc-text">gzip优化web</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/06/02/我的第一个个人博客/" class="archive-article-date">
-  	<time datetime="2019-06-02T02:04:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-02</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/06/02/我的第一个个人博客/">我的第一个个人博客</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">hello world</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
+
+
+
+<section id="comments" class="comments">
+  <style>
+    .comments{margin:30px;padding:10px;background:#fff}
+    @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+  </style>
+  <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'false' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "fIef6TiLGUeTe1qaIH5VwNm3-gzGzoHsz",
+            app_key: "B3Ord4SpJrNEVJakMlmKc5fa",
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            avatar:"mm"
+        });
+    }
+</script>
+  </section>
 
 
           </div>
@@ -301,8 +483,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
