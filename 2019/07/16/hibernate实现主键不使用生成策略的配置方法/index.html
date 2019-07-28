@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://47.100.52.248/blog">
   <title>hibernate实现主键不使用生成策略的配置方法 | zbzbzzz的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在我最近使用hibernate的过程中刚好遇到不想用生成策略的表 但是在查百度的过程中遇到了几个不同版本的答案，后面我一一实验的出以下正确结果  xml配置1234&amp;lt;id name=&amp;quot;departmentId&amp;quot; type=&amp;quot;string&amp;quot;&amp;gt;	&amp;lt;column name=&amp;quot;DEPARTMENT_ID&amp;quot; length=&amp;qu">
+  <meta name="description" content="在我最近使用hibernate的过程中刚好遇到不想用生成策略的表 但是在查百度的过程中遇到了几个不同版本的答案，后面我一一实验的出以下正确结果">
 <meta name="keywords" content="hibernate,主键生成策略">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hibernate实现主键不使用生成策略的配置方法">
 <meta property="og:url" content="http://47.100.52.248/blog/2019/07/16/hibernate实现主键不使用生成策略的配置方法/index.html">
 <meta property="og:site_name" content="zbzbzzz的个人博客">
-<meta property="og:description" content="在我最近使用hibernate的过程中刚好遇到不想用生成策略的表 但是在查百度的过程中遇到了几个不同版本的答案，后面我一一实验的出以下正确结果  xml配置1234&amp;lt;id name=&amp;quot;departmentId&amp;quot; type=&amp;quot;string&amp;quot;&amp;gt;	&amp;lt;column name=&amp;quot;DEPARTMENT_ID&amp;quot; length=&amp;qu">
+<meta property="og:description" content="在我最近使用hibernate的过程中刚好遇到不想用生成策略的表 但是在查百度的过程中遇到了几个不同版本的答案，后面我一一实验的出以下正确结果">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-16T14:11:57.378Z">
+<meta property="og:updated_time" content="2019-07-16T14:18:43.266Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hibernate实现主键不使用生成策略的配置方法">
-<meta name="twitter:description" content="在我最近使用hibernate的过程中刚好遇到不想用生成策略的表 但是在查百度的过程中遇到了几个不同版本的答案，后面我一一实验的出以下正确结果  xml配置1234&amp;lt;id name=&amp;quot;departmentId&amp;quot; type=&amp;quot;string&amp;quot;&amp;gt;	&amp;lt;column name=&amp;quot;DEPARTMENT_ID&amp;quot; length=&amp;qu">
+<meta name="twitter:description" content="在我最近使用hibernate的过程中刚好遇到不想用生成策略的表 但是在查百度的过程中遇到了几个不同版本的答案，后面我一一实验的出以下正确结果">
   
     <link rel="alternative" href="/atom.xml" title="zbzbzzz的个人博客" type="application/atom+xml">
   
@@ -175,6 +175,8 @@
 <li>在我最近使用hibernate的过程中刚好遇到不想用生成策略的表</li>
 <li>但是在查百度的过程中遇到了几个不同版本的答案，后面我一一实验的出以下正确结果</li>
 </ul>
+<a id="more"></a>
+
 <h2 id="xml配置"><a href="#xml配置" class="headerlink" title="xml配置"></a>xml配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;id name=&quot;departmentId&quot; type=&quot;string&quot;&gt;</span><br><span class="line">	&lt;column name=&quot;DEPARTMENT_ID&quot; length=&quot;3&quot; /&gt;</span><br><span class="line">	&lt;generator class=&quot;assigned&quot; /&gt;</span><br><span class="line">&lt;/id&gt;</span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -281,6 +283,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/blog/2019/07/28/抽象类中注入bean/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          抽象类中注入bean
+        
+      </div>
+    </a>
   
   
     <a href="/blog/2019/07/02/mybatis加pagehelper产生的n-1问题/" id="article-nav-older" class="article-nav-link-wrap">
@@ -471,6 +482,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Spring Security</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">hello world</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Base抽取，spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">抽象类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
@@ -480,14 +507,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">cors</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spring Security</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">hello world</a>
               </li>
             
             <div class="clearfix"></div>

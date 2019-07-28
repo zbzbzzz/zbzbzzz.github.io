@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://47.100.52.248/blog">
-  <title>mybatis加pagehelper产生的n+1问题 | zbzbzzz的个人博客</title>
+  <title>用抽象类代替接口出现的异常 | zbzbzzz的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在开始学习mybatis时我就了解到了pagehelper这个开源工具">
-<meta name="keywords" content="mybatis,pagehelper">
+  <meta name="description" content="模块不多的时候并不一定需要接口，完全可以用一个抽象类抽取共有的功能就足够了">
+<meta name="keywords" content="抽象类">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mybatis加pagehelper产生的n+1问题">
-<meta property="og:url" content="http://47.100.52.248/blog/2019/07/02/mybatis加pagehelper产生的n-1问题/index.html">
+<meta property="og:title" content="用抽象类代替接口出现的异常">
+<meta property="og:url" content="http://47.100.52.248/blog/2019/07/28/用抽象类代替接口出现的异常/index.html">
 <meta property="og:site_name" content="zbzbzzz的个人博客">
-<meta property="og:description" content="在开始学习mybatis时我就了解到了pagehelper这个开源工具">
+<meta property="og:description" content="模块不多的时候并不一定需要接口，完全可以用一个抽象类抽取共有的功能就足够了">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-02T13:49:14.799Z">
+<meta property="og:updated_time" content="2019-07-28T04:55:04.354Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mybatis加pagehelper产生的n+1问题">
-<meta name="twitter:description" content="在开始学习mybatis时我就了解到了pagehelper这个开源工具">
+<meta name="twitter:title" content="用抽象类代替接口出现的异常">
+<meta name="twitter:description" content="模块不多的时候并不一定需要接口，完全可以用一个抽象类抽取共有的功能就足够了">
   
     <link rel="alternative" href="/atom.xml" title="zbzbzzz的个人博客" type="application/atom+xml">
   
@@ -151,20 +151,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-mybatis加pagehelper产生的n-1问题" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-用抽象类代替接口出现的异常" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      mybatis加pagehelper产生的n+1问题
+      用抽象类代替接口出现的异常
     </h1>
   
 
         
-        <a href="/blog/2019/07/02/mybatis加pagehelper产生的n-1问题/" class="archive-article-date">
-  	<time datetime="2019-07-02T13:11:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-02</time>
+        <a href="/blog/2019/07/28/用抽象类代替接口出现的异常/" class="archive-article-date">
+  	<time datetime="2019-07-28T04:46:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-28</time>
 </a>
         
       </header>
@@ -172,33 +172,28 @@
     <div class="article-entry" itemprop="articleBody">
       
         <ul>
-<li>在开始学习mybatis时我就了解到了pagehelper这个开源工具</li>
+<li>模块不多的时候并不一定需要接口，完全可以用一个抽象类抽取共有的功能就足够了</li>
 </ul>
 <a id="more"></a>
 
 <ul>
-<li>一开始只是对一些简单的数据进行分页</li>
-<li>后面涉及到了一对多</li>
-<li>就比如说一个商品是有多个商品展示图片的，这就是一个一对多的关系</li>
-<li>然后我们现在就有一个业务就是把商品展示在商品列表（带图片）</li>
-<li>一般我们的思维都是先想到在数据库进行连接查询后把查询到的商品组合成一个list</li>
-<li>再把这个list发给前端页面，同时在其中用pagehelper进行分页</li>
-<li>但是这时我们发现pagehelper里面的数据并不是我们想要的商品的数量而是商品图片的数量总和</li>
-<li>我一度怀疑是我参数设置错了</li>
-<li>后面通过debug和查看pagehelper在github上的介绍，发现pagehelper是不支持一对多查询的</li>
-<li>这个时候其实有两个解决办法</li>
+<li>原抽象类</li>
 </ul>
-<h2 id="解决办法一"><a href="#解决办法一" class="headerlink" title="解决办法一"></a>解决办法一</h2><ul>
-<li>不使用连接查询而是在查询完商品后根据商品id继续查询商品图片</li>
-<li>这样其实是效率不高的</li>
-<li>对数据库的问增加了n</li>
-<li>算法的时间复杂度也增加了n</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public abstract class BaseCrudControllerImpl&lt;T&gt; implements BaseCrudController&lt;T&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改后抽象类</li>
 </ul>
-<h2 id="解决办法二"><a href="#解决办法二" class="headerlink" title="解决办法二"></a>解决办法二</h2><ul>
-<li>对数据库查询语句进行优化</li>
-<li>其实这我也不会，这个在思否上有一篇文章讲了</li>
-<li>但是我看不懂，这需要比较深的sql基础</li>
-<li>突然想用hibernate哈哈哈哈哈</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public abstract class BaseCrudControllerImpl&lt;T&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>运行时出现以下异常</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.IllegalStateException: The mapped handler method class &apos;com.ssxxglxt.controller.base.Impl.BaseCrudControllerImpl&apos; is not an instance of the actual controller bean class &apos;com.ssxxglxt.controller.superAdmin.UserController&apos;. If the controller requires proxying (e.g. due to @Transactional), please use class-based proxying.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这里我也没有弄清楚这其中的原理</li>
+<li>我觉得是行的通的但是还是出现了异常</li>
 </ul>
 
       
@@ -213,11 +208,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mybatis</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">pagehelper</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">抽象类</a>
         		</li>
       		
 		</ul>
@@ -273,7 +264,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://47.100.52.248/blog/2019/07/02/mybatis加pagehelper产生的n-1问题/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://47.100.52.248/blog/2019/07/28/用抽象类代替接口出现的异常/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -287,18 +278,9 @@
   
 <nav id="article-nav">
   
-    <a href="/blog/2019/07/16/hibernate实现主键不使用生成策略的配置方法/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          hibernate实现主键不使用生成策略的配置方法
-        
-      </div>
-    </a>
   
-  
-    <a href="/blog/2019/06/25/vue中使用axios并通过cors进行跨域请求/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">vue中使用axios并通过cors进行跨域请求</div>
+    <a href="/blog/2019/07/28/抽象类中注入bean/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">抽象类中注入bean</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -325,7 +307,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#解决办法一"><span class="toc-number">1.</span> <span class="toc-text">解决办法一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决办法二"><span class="toc-number">2.</span> <span class="toc-text">解决办法二</span></a></li></ol>
+                    目录，不存在的…
                     </div>
                 </span>
             </div>

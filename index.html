@@ -151,6 +151,163 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-用抽象类代替接口出现的异常" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2019/07/28/用抽象类代替接口出现的异常/">用抽象类代替接口出现的异常</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2019/07/28/用抽象类代替接口出现的异常/" class="archive-article-date">
+  	<time datetime="2019-07-28T04:46:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>模块不多的时候并不一定需要接口，完全可以用一个抽象类抽取共有的功能就足够了</li>
+</ul>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">抽象类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2019/07/28/用抽象类代替接口出现的异常/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+  
+    <article id="post-抽象类中注入bean" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2019/07/28/抽象类中注入bean/">抽象类中注入bean</a>
+    </h1>
+  
+
+        
+        <a href="/blog/2019/07/28/抽象类中注入bean/" class="archive-article-date">
+  	<time datetime="2019-07-28T02:35:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="在base抽取中baseImpl为什么要用抽象类"><a href="#在base抽取中baseImpl为什么要用抽象类" class="headerlink" title="在base抽取中baseImpl为什么要用抽象类"></a>在base抽取中baseImpl为什么要用抽象类</h1><ul>
+<li>在写项目的时候crud是每个模块都必备的功能，所以我们创建base类去抽取crud，然后每个模块都去继承它，以简化代码</li>
+<li>但是每个模块依赖的bean是不同的，所以我们用泛型的方式动态的改变注入的bean</li>
+</ul>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Base抽取，spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/blog/2019/07/28/抽象类中注入bean/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+  
     <article id="post-hibernate实现主键不使用生成策略的配置方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -175,27 +332,7 @@
 <li>在我最近使用hibernate的过程中刚好遇到不想用生成策略的表</li>
 <li>但是在查百度的过程中遇到了几个不同版本的答案，后面我一一实验的出以下正确结果</li>
 </ul>
-<h2 id="xml配置"><a href="#xml配置" class="headerlink" title="xml配置"></a>xml配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;id name=&quot;departmentId&quot; type=&quot;string&quot;&gt;</span><br><span class="line">	&lt;column name=&quot;DEPARTMENT_ID&quot; length=&quot;3&quot; /&gt;</span><br><span class="line">	&lt;generator class=&quot;assigned&quot; /&gt;</span><br><span class="line">&lt;/id&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>xml配置大家给出的答案都是相同的</li>
-<li>其中主要决定生成策略的就是<generator class="assigned"></generator></li>
-</ul>
-<h2 id="注解配置"><a href="#注解配置" class="headerlink" title="注解配置"></a>注解配置</h2><h3 id="百度上错误配置"><a href="#百度上错误配置" class="headerlink" title="百度上错误配置"></a>百度上错误配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@GeneratedValue(strategy = GenerationType.AUTO)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>就只是直接配这个</li>
-<li>这样只是把主键生成策略交给持久化引擎(persistence engine),持久化引擎会根据数据库在以上三种主键生成策略中选择其中一种</li>
-<li>百度上有些博客就把这个配置等同于上面的xml</li>
-</ul>
-<h3 id="正确配置"><a href="#正确配置" class="headerlink" title="正确配置"></a>正确配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@GenericGenerator(name=&quot;idGenerator&quot;, strategy=&quot;assigned&quot;)</span><br><span class="line">@GeneratedValue(generator=&quot;idGenerator&quot;)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>需要这两个注解同时使用</li>
-<li>@GeneratedValue是符合jpa规范的生成策略</li>
-<li>@GenericGenerator是hibernate提供的</li>
-</ul>
-
+        
       
 
       
@@ -770,6 +907,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Spring Security</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">hello world</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Base抽取，spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">抽象类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
@@ -779,14 +932,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">cors</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Spring Security</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">hello world</a>
               </li>
             
             <div class="clearfix"></div>

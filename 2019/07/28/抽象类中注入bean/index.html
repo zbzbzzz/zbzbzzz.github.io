@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://47.100.52.248/blog">
-  <title>mybatis加pagehelper产生的n+1问题 | zbzbzzz的个人博客</title>
+  <title>抽象类中注入bean | zbzbzzz的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在开始学习mybatis时我就了解到了pagehelper这个开源工具">
-<meta name="keywords" content="mybatis,pagehelper">
+  <meta name="description" content="在base抽取中baseImpl为什么要用抽象类 在写项目的时候crud是每个模块都必备的功能，所以我们创建base类去抽取crud，然后每个模块都去继承它，以简化代码 但是每个模块依赖的bean是不同的，所以我们用泛型的方式动态的改变注入的bean">
+<meta name="keywords" content="Base抽取，spring">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mybatis加pagehelper产生的n+1问题">
-<meta property="og:url" content="http://47.100.52.248/blog/2019/07/02/mybatis加pagehelper产生的n-1问题/index.html">
+<meta property="og:title" content="抽象类中注入bean">
+<meta property="og:url" content="http://47.100.52.248/blog/2019/07/28/抽象类中注入bean/index.html">
 <meta property="og:site_name" content="zbzbzzz的个人博客">
-<meta property="og:description" content="在开始学习mybatis时我就了解到了pagehelper这个开源工具">
+<meta property="og:description" content="在base抽取中baseImpl为什么要用抽象类 在写项目的时候crud是每个模块都必备的功能，所以我们创建base类去抽取crud，然后每个模块都去继承它，以简化代码 但是每个模块依赖的bean是不同的，所以我们用泛型的方式动态的改变注入的bean">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-02T13:49:14.799Z">
+<meta property="og:updated_time" content="2019-07-28T03:14:10.785Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mybatis加pagehelper产生的n+1问题">
-<meta name="twitter:description" content="在开始学习mybatis时我就了解到了pagehelper这个开源工具">
+<meta name="twitter:title" content="抽象类中注入bean">
+<meta name="twitter:description" content="在base抽取中baseImpl为什么要用抽象类 在写项目的时候crud是每个模块都必备的功能，所以我们创建base类去抽取crud，然后每个模块都去继承它，以简化代码 但是每个模块依赖的bean是不同的，所以我们用泛型的方式动态的改变注入的bean">
   
     <link rel="alternative" href="/atom.xml" title="zbzbzzz的个人博客" type="application/atom+xml">
   
@@ -151,54 +151,47 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-mybatis加pagehelper产生的n-1问题" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-抽象类中注入bean" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      mybatis加pagehelper产生的n+1问题
+      抽象类中注入bean
     </h1>
   
 
         
-        <a href="/blog/2019/07/02/mybatis加pagehelper产生的n-1问题/" class="archive-article-date">
-  	<time datetime="2019-07-02T13:11:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-02</time>
+        <a href="/blog/2019/07/28/抽象类中注入bean/" class="archive-article-date">
+  	<time datetime="2019-07-28T02:35:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li>在开始学习mybatis时我就了解到了pagehelper这个开源工具</li>
+        <h1 id="在base抽取中baseImpl为什么要用抽象类"><a href="#在base抽取中baseImpl为什么要用抽象类" class="headerlink" title="在base抽取中baseImpl为什么要用抽象类"></a>在base抽取中baseImpl为什么要用抽象类</h1><ul>
+<li>在写项目的时候crud是每个模块都必备的功能，所以我们创建base类去抽取crud，然后每个模块都去继承它，以简化代码</li>
+<li>但是每个模块依赖的bean是不同的，所以我们用泛型的方式动态的改变注入的bean</li>
 </ul>
 <a id="more"></a>
 
 <ul>
-<li>一开始只是对一些简单的数据进行分页</li>
-<li>后面涉及到了一对多</li>
-<li>就比如说一个商品是有多个商品展示图片的，这就是一个一对多的关系</li>
-<li>然后我们现在就有一个业务就是把商品展示在商品列表（带图片）</li>
-<li>一般我们的思维都是先想到在数据库进行连接查询后把查询到的商品组合成一个list</li>
-<li>再把这个list发给前端页面，同时在其中用pagehelper进行分页</li>
-<li>但是这时我们发现pagehelper里面的数据并不是我们想要的商品的数量而是商品图片的数量总和</li>
-<li>我一度怀疑是我参数设置错了</li>
-<li>后面通过debug和查看pagehelper在github上的介绍，发现pagehelper是不支持一对多查询的</li>
-<li>这个时候其实有两个解决办法</li>
+<li>base接口</li>
 </ul>
-<h2 id="解决办法一"><a href="#解决办法一" class="headerlink" title="解决办法一"></a>解决办法一</h2><ul>
-<li>不使用连接查询而是在查询完商品后根据商品id继续查询商品图片</li>
-<li>这样其实是效率不高的</li>
-<li>对数据库的问增加了n</li>
-<li>算法的时间复杂度也增加了n</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public interface BaseCrudController&lt;T&gt; &#123;</span><br><span class="line"></span><br><span class="line">    ResponseVo&lt;T&gt; add(T obj);</span><br><span class="line"></span><br><span class="line">    PageResultVo&lt;T&gt; list(BaseConditionVo&lt;T&gt; baseConditionVo);</span><br><span class="line"></span><br><span class="line">    ResponseVo&lt;T&gt; update(T obj);</span><br><span class="line"></span><br><span class="line">    ResponseVo&lt;T&gt; delete(T obj);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>base抽象类继承接口</li>
 </ul>
-<h2 id="解决办法二"><a href="#解决办法二" class="headerlink" title="解决办法二"></a>解决办法二</h2><ul>
-<li>对数据库查询语句进行优化</li>
-<li>其实这我也不会，这个在思否上有一篇文章讲了</li>
-<li>但是我看不懂，这需要比较深的sql基础</li>
-<li>突然想用hibernate哈哈哈哈哈</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">public abstract class BaseCrudControllerImpl&lt;T&gt; implements BaseCrudController&lt;T&gt; &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired(required = false)</span><br><span class="line">    private BaseService&lt;T&gt; baseService;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    @PostMapping(&quot;/add&quot;)</span><br><span class="line">    public ResponseVo&lt;T&gt; add(T obj) &#123;</span><br><span class="line">        System.out.println(&quot;add&quot;);</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    @PostMapping(&quot;/list&quot;)</span><br><span class="line">    public PageResultVo&lt;T&gt; list(BaseConditionVo&lt;T&gt; baseConditionVo) &#123;</span><br><span class="line">        PageInfo&lt;T&gt; pageInfo =baseService.listByPage(baseConditionVo);</span><br><span class="line">        System.out.println(&quot;list&quot;);</span><br><span class="line">        return ResultUtil.tablePage(pageInfo);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    @GetMapping(&quot;/update&quot;)</span><br><span class="line">    public ResponseVo&lt;T&gt; update(T obj) &#123;</span><br><span class="line">        System.out.println(&quot;update&quot;);</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    @GetMapping(&quot;/delete&quot;)</span><br><span class="line">    public ResponseVo&lt;T&gt; delete(T obj) &#123;</span><br><span class="line">        System.out.println(&quot;delete&quot;);</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这里base的实现类我用了一个抽象类</li>
+<li>这是因为我需要在这里面注入一个动态改变的BaseService</li>
+<li>抽象类无法被实例化，spring也无法将bean去注入这个抽象类，当时其中的@Autowired注释的bean会被子类继承，然后spring再根据子类的最终配置去实例化和注入。</li>
+<li>这样就达到了动态变化依赖的类的功能了</li>
 </ul>
 
       
@@ -213,11 +206,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">mybatis</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">pagehelper</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Base抽取，spring</a>
         		</li>
       		
 		</ul>
@@ -273,7 +262,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://47.100.52.248/blog/2019/07/02/mybatis加pagehelper产生的n-1问题/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://47.100.52.248/blog/2019/07/28/抽象类中注入bean/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -287,18 +276,18 @@
   
 <nav id="article-nav">
   
-    <a href="/blog/2019/07/16/hibernate实现主键不使用生成策略的配置方法/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/blog/2019/07/28/用抽象类代替接口出现的异常/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          hibernate实现主键不使用生成策略的配置方法
+          用抽象类代替接口出现的异常
         
       </div>
     </a>
   
   
-    <a href="/blog/2019/06/25/vue中使用axios并通过cors进行跨域请求/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">vue中使用axios并通过cors进行跨域请求</div>
+    <a href="/blog/2019/07/16/hibernate实现主键不使用生成策略的配置方法/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">hibernate实现主键不使用生成策略的配置方法</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -325,7 +314,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#解决办法一"><span class="toc-number">1.</span> <span class="toc-text">解决办法一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决办法二"><span class="toc-number">2.</span> <span class="toc-text">解决办法二</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#在base抽取中baseImpl为什么要用抽象类"><span class="toc-number">1.</span> <span class="toc-text">在base抽取中baseImpl为什么要用抽象类</span></a></li></ol>
                     </div>
                 </span>
             </div>
