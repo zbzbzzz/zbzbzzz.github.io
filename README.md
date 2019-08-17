@@ -1,3 +1,3 @@
-# zbzbzzz.github.io
-# http://www.zbzbzzz.top/blog
-# 这个也可以访问
+# 静态博客已经不再更新
+# 目前用的是halo搭建的博客
+# 地址:https://zbzbzzz.top
